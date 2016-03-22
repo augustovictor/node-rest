@@ -23,7 +23,7 @@ var routes = function(Book) {
             var book = new Book(req.body);
             book.save();
 
-            res.status(201).send(book);
+            res.status(201).send(book); // Added
 
         });
 
@@ -53,8 +53,8 @@ var routes = function(Book) {
             req.book.read   = req.body.read;
 
             req.book.save(function(err) {
-                if(err) throw err;
-                res.json(req.book);
+                if(err) res.status(500).send(err);
+                else res.json(req.book);
             });
         })
 
@@ -66,8 +66,15 @@ var routes = function(Book) {
             }
 
             req.book.save(function(err) {
-                if(err) throw err;
-                res.json(req.book);
+                if(err) res.status(500).send(err);
+                else res.json(req.book);
+            });
+        })
+
+        .delete(function(req, res) {
+            req.book.remove(function(err) {
+                if(err) res.status(500).send(err);
+                else res.status(204).send('Removed'); // Removed
             });
         });
 
