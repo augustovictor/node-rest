@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/victoraweb/node-rest#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.0.6"
   }
 }
