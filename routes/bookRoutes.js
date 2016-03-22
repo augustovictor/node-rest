@@ -52,12 +52,23 @@ var routes = function(Book) {
             req.book.genro  = req.body.genro;
             req.book.read   = req.body.read;
 
-            book.save();
-            res.json(req.book);
+            req.book.save(function(err) {
+                if(err) throw err;
+                res.json(req.book);
+            });
         })
 
         .patch(function(req, res) {
+            if (req.body._id) delete req.body._id;
 
+            for(var param in req.body) {
+                req.book[param] = req.body[param];
+            }
+
+            req.book.save(function(err) {
+                if(err) throw err;
+                res.json(req.book);
+            });
         });
 
     return bookRouter;
