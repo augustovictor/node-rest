@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/victoraweb/node-rest/issues"
   },
-  "homepage": "https://github.com/victoraweb/node-rest#readme"
+  "homepage": "https://github.com/victoraweb/node-rest#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
