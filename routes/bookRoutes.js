@@ -4,6 +4,7 @@ var routes = function(Book) {
     var bookRouter = express.Router();
 
     bookRouter.route('/')
+
         .get(function(req, res) {
             var query = {};
 
@@ -17,6 +18,7 @@ var routes = function(Book) {
                 })
                 // res.render('viewName'); // For html
         })
+
         .post(function(req, res) {
             var book = new Book(req.body);
             book.save();
@@ -30,6 +32,20 @@ var routes = function(Book) {
             Book.findById(req.params.id, function(err, book) {
                 if (err) throw err;
                 res.json(book);
+            });
+        })
+
+        .put(function(req, res) {
+            Book.findById(req.params.id, function(err, book) {
+                if(err) throw err;
+
+                // No errors
+                book.title  = req.body.title;
+                book.author = req.body.author;
+                book.genro  = req.body.genro;
+                book.read   = req.body.read;
+
+                book.save();
             });
         });
 
