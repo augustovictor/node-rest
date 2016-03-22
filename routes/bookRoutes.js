@@ -27,26 +27,37 @@ var routes = function(Book) {
 
         });
 
+    // Middleware
+    bookRouter.use('/:id', function(req, res, next) {
+        Book.findById(req.params.id, function(err, book) {
+            if (err) throw err;
+
+            else if (book) {
+                req.book = book;
+                next();
+            }
+
+            else res.status(404).send('No book found');
+        });
+    });
+
     bookRouter.route('/:id')
         .get(function(req, res) {
-            Book.findById(req.params.id, function(err, book) {
-                if (err) throw err;
-                res.json(book);
-            });
+            res.json(req.book);
         })
 
         .put(function(req, res) {
-            Book.findById(req.params.id, function(err, book) {
-                if(err) throw err;
+            req.book.title  = req.body.title;
+            req.book.author = req.body.author;
+            req.book.genro  = req.body.genro;
+            req.book.read   = req.body.read;
 
-                // No errors
-                book.title  = req.body.title;
-                book.author = req.body.author;
-                book.genro  = req.body.genro;
-                book.read   = req.body.read;
+            book.save();
+            res.json(req.book);
+        })
 
-                book.save();
-            });
+        .patch(function(req, res) {
+
         });
 
     return bookRouter;
