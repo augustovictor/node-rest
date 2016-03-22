@@ -1,0 +1,20 @@
+{
+  "name": "node-rest",
+  "version": "1.0.0",
+  "description": "It is a book api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victoraweb/node-rest.git"
+  },
+  "keywords": [],
+  "author": "Victor Augusto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victoraweb/node-rest/issues"
+  },
+  "homepage": "https://github.com/victoraweb/node-rest#readme"
+}
