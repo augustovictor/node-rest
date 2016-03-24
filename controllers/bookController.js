@@ -23,8 +23,27 @@ var bookController = function(Book) {
         }
 
         Book.find(query, function(err, books) {
-                if (err) throw err;
-                res.json(books);
+                if (err) res.status(500).send(err);
+                else {
+                    var returnBooks = [];
+                    // Here we are getting mongoose models. So we cannot change what those elements are without changing the model
+                    books.forEach(function(book, index, array) {
+                        var newBook = book.toJSON();
+
+                        /*
+                        This is where we add all of our hyperlinks. So if you want to know what else it is possible to do with the object just
+                        check the full list
+                        */
+                        newBook.links = {};
+
+                        // For every book in our return it will send us back the book + a link to get to that individual book
+                        newBook.links.self = 'http://' + req.headers.host + '/api/books/' + newBook._id;
+
+                        returnBooks.push(newBook);
+                    });
+
+                    res.json(returnBooks);
+                }
             })
             // res.render('viewName'); // For html
     };
