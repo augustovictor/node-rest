@@ -41,3 +41,5 @@ app.get('/', function(req, res) {
 app.listen(port, function() {
     console.log('Gulp is running at http://localhost:' + port);
 });
+
+module.exports = app; // This allows supertest to execute on app
