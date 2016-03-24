@@ -66,7 +66,12 @@ var bookController = function(Book) {
     };
 
     var getOne = function(req, res) {
-        res.json(req.book);
+        var returnBook = req.book.toJSON();
+
+        returnBook.links = {};
+        returnBook.links.FilterByThisGenre = 'http://' + req.headers.host + '/api/books?genre=' + returnBook.genre.replace(' ', '%20');
+
+        res.json(returnBook);
     };
 
     var put = function(req, res) {
